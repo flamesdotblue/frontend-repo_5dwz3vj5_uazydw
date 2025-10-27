@@ -1,21 +1,28 @@
-import React, { useEffect } from 'react';
-import HeaderHero from './components/HeaderHero';
-import Catalogue from './components/Catalogue';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import HomePage from './components/HomePage';
+import CataloguePage from './components/CataloguePage';
+import ItemPage from './components/ItemPage';
 import BookingForm from './components/BookingForm';
 import Footer from './components/Footer';
 
 function App() {
-  useEffect(() => {
-    document.title = 'Café Aroma — Crafted Coffee, Cozy Vibes';
-  }, []);
-
   return (
-    <div className="min-h-screen bg-white text-amber-900">
-      <HeaderHero />
-      <Catalogue />
-      <BookingForm />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="min-h-screen bg-white text-amber-900 flex flex-col">
+        <Navbar />
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/catalogue" element={<CataloguePage />} />
+            <Route path="/item/:id" element={<ItemPage />} />
+            <Route path="/booking" element={<BookingForm />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
